@@ -1,6 +1,8 @@
 config:
     name: testcase description
-    variables: {}
+    variables: {
+        new_title: "通知_${get_timestamp()}"
+    }
     verify: False
 teststeps:
 -   name: login
@@ -14,7 +16,7 @@ teststeps:
             _sign: 0e0a6f2c27f2de60095acb8a9249b4ee
             _timestamp: '1595838387000'
             content: '2222'
-            noticeTitle: '1111'
+            noticeTitle: $new_title
             noticeType: '2'
             terminal: pc
             token: $get_token
