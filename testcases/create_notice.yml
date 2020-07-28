@@ -1,0 +1,64 @@
+config:
+    name: testcase description
+    variables: {}
+    verify: False
+teststeps:
+-   name: login
+    testcase: testcases/login.yml
+    extract: 
+        - get_token
+        
+-   name: /zhgd_mms/notice/save_notice
+    request:
+        data:
+            _sign: 0e0a6f2c27f2de60095acb8a9249b4ee
+            _timestamp: '1595838387000'
+            content: '2222'
+            noticeTitle: '1111'
+            noticeType: '2'
+            terminal: pc
+            token: $get_token
+            v: ''
+        headers:
+            Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+            User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+        method: POST
+        url: http://10.23.190.107/zhgd_mms/notice/save_notice
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - headers.Content-Type
+        - application/json
+    -   eq:
+        - content.code
+        - 200
+-   name: /zhgd_mms/notice/get_notice_list
+    request:
+        headers:
+            User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36
+                (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36
+        method: GET
+        params:
+            _sign: 16ccf1761fe59d93f2abe7e247fdaf6c
+            _timestamp: '1595838387000'
+            noticeKeywords: ''
+            offset: '1'
+            pageSize: '10'
+            status: ''
+            terminal: pc
+            token: $get_token
+            v: ''
+        url: http://10.23.190.107/zhgd_mms/notice/get_notice_list
+    validate:
+    -   eq:
+        - status_code
+        - 200
+    -   eq:
+        - headers.Content-Type
+        - application/json
+    -   eq:
+        - content.code
+        - 200
