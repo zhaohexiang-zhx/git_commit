@@ -35,6 +35,10 @@ teststeps:
     -   eq:
         - content.code
         - 200
+    -   eq:
+        - content.results.msg
+        - "保存成功"
+    
 -   name: /zhgd_mms/notice/get_notice_list
     request:
         headers:
