@@ -3,7 +3,6 @@ config:
     variables: 
         loginName: ${ENV(USERNAME)}
         password: ${ENV(PASSWORD)}
-    
     verify: False
     base_url: ${get_base_url(prod)}
     export:
